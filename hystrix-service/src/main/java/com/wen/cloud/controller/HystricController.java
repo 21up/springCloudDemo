@@ -40,4 +40,13 @@ public class HystricController {
         userService.getUserCache(id);
         return new User();
     }
+    @GetMapping("/testRemoveCache/{id}")
+    public User testRemoveCache(@PathVariable String id) {
+        userService.getUserCache(id);
+        userService.removeCache(id);
+        userService.getUserCache(id);
+        userService.removeCache(id);
+        userService.getUserCache(id);
+        return new User();
+    }
 }
