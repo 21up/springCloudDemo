@@ -28,4 +28,11 @@ public class UserService {
         user.setPassword("error");
         return user;
     }
+    @HystrixCommand(fallbackMethod = "getDefaultUser",
+                    commandKey = "getUserCommand",
+                    groupKey = "getUserGroup",
+                    threadPoolKey = "getUserThreadPool")
+    public User testCommand(String id) {
+        return restTemplate.getForObject(serviceUrl+"/user/{1}",User.class,id);
+    }
 }

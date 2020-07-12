@@ -25,4 +25,8 @@ public class HystricController {
     public User testFallback(@PathVariable String id){
         return userService.testFallback(id);
     }
+    @GetMapping("testCommand/{id}")
+    public User testCommand(@PathVariable String id){
+        return userService.testCommand(id);
+    }
 }
