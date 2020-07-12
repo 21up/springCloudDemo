@@ -29,4 +29,8 @@ public class HystricController {
     public User testCommand(@PathVariable String id){
         return userService.testCommand(id);
     }
+    @GetMapping("/testException/{id}")
+    public User testException(@PathVariable String id) {
+        return userService.testException(id);
+    }
 }
