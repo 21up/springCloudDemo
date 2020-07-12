@@ -1,6 +1,7 @@
 package com.wen.cloud.service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheResult;
 import com.wen.cloud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,5 +53,14 @@ public class UserService {
         user.setUsername("getDefaultUser2");
         user.setPassword("getDefaultUser2");
         return user;
+    }
+    @CacheResult(cacheKeyMethod = "getCacheKey")
+    @HystrixCommand(fallbackMethod = "getDefaultUser",commandKey = "getUserCache")
+    public User getUserCache(String id) {
+        System.out.println("用户id"+id);
+        return restTemplate.getForObject(serviceUrl+"/user/{1}",User.class,id);
+    }
+    public String getCacheKey(String id){
+        return String.valueOf(id);
     }
 }

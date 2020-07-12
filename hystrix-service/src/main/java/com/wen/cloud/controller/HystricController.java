@@ -33,4 +33,11 @@ public class HystricController {
     public User testException(@PathVariable String id) {
         return userService.testException(id);
     }
+    @GetMapping("/testCache/{id}")
+    public User testCache(@PathVariable String id) {
+        userService.getUserCache(id);
+        userService.getUserCache(id);
+        userService.getUserCache(id);
+        return new User();
+    }
 }
