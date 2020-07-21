@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
  * Created by 21up on 2020/7/12
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public User getUser(@PathVariable String id){
         System.out.println("user-service");
         return userService.getUserById(id);
