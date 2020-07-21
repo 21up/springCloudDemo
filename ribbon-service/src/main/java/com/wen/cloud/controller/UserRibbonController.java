@@ -1,6 +1,6 @@
 package com.wen.cloud.controller;
 
-import com.netflix.discovery.converters.Auto;
+/*import com.netflix.discovery.converters.Auto;*/
 import com.wen.cloud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
