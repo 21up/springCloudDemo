@@ -2,7 +2,7 @@ server:
   port: 8206
 spring:
   application:
-    name: nacos-user-service
+    name: user-service
   cloud:
     nacos:
       discovery:

@@ -12,3 +12,5 @@ management:
     web:
       exposure:
         include: '*'
+service-url:
+  user-service: http://user-service
