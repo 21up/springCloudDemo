@@ -2,6 +2,7 @@ package com.wen.cloud.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.wen.cloud.handller.CustomBlockHandler;
 import com.wen.cloud.model.CommonResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +33,12 @@ public class RateLimitController {
     public CommonResult handleException(BlockException exception){
         return new CommonResult(exception.getClass().getCanonicalName(),500);
     }
-
+    /**
+     * 自定义通用的限流处理逻辑
+     */
+    @GetMapping("/customBlockHandler")
+    @SentinelResource(value = "customBlockHandler", blockHandler = "handleException",blockHandlerClass = CustomBlockHandler.class)
+    public CommonResult blockHandler() {
+        return new CommonResult("限流成功", 200);
+    }
 }
