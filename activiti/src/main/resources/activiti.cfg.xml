@@ -12,7 +12,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/activiti" />
         <property name="username" value="root" />
-        <property name="password" value="root" />
+        <property name="password" value="123456" />
     </bean>
     <!--activiti单独运行的ProcessEngine配置对象(processEngineConfiguration),使用单独启动方式
         默认情况下：bean的id=processEngineConfiguration

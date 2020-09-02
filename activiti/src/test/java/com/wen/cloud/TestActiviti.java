@@ -1,5 +1,6 @@
 package com.wen.cloud;
 
+import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,5 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TestActiviti {
     @Autowired
     private ProcessEngineConfiguration processEngineConfiguration;
-
+    @Test
+    public void testGenTable(){
+        ProcessEngineConfiguration configuration = ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti.cfg.xml");
+        ProcessEngine processEngine = configuration.buildProcessEngine();
+        System.out.println(processEngine);
+    }
 }
