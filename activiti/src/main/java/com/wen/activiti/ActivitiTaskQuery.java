@@ -15,15 +15,24 @@ public class ActivitiTaskQuery {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         TaskService taskService = processEngine.getTaskService();
         //根据流程定义的key,负责人assignee来实现当前用户的任务列表查询
-        List<Task> taskList = taskService.createTaskQuery()
+        //张三任务列表
+       /* List<Task> taskList = taskService.createTaskQuery()
                 .processDefinitionKey("holiday")
-                .taskAssignee("zhangsan")
+                .taskAssignee("lisi")
                 .list();
         for (Task task:taskList){
             System.out.println("流程实例ID"+task.getProcessInstanceId());
             System.out.println("任务ID"+task.getId());
             System.out.println("任务负责人"+task.getAssignee());
             System.out.println("任务名称"+task.getName());
-        }
+        }*/
+        //李四任务列表
+        Task task = taskService.createTaskQuery()
+                .taskAssignee("wangwu")
+                .singleResult();
+        System.out.println("流程实例ID"+task.getProcessInstanceId());
+        System.out.println("任务ID"+task.getId());
+        System.out.println("任务负责人"+task.getAssignee());
+        System.out.println("任务名称"+task.getName());
     }
 }
