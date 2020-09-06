@@ -3,6 +3,8 @@ package com.wen.cloud;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,5 +26,15 @@ public class TestActiviti {
     public void testSimpleGenTable(){
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         System.out.println(processEngine);
+    }
+    @Test
+    public void startProcessInstance(){
+        String processDefinitionKey = "holiday";
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey);
+        System.out.println("流程定义ID:"+processInstance.getProcessDefinitionId());
+        System.out.println("流程实例ID:"+processInstance.getId());
+        System.out.println("当前活动ID:"+processInstance.getActivityId());
     }
 }
