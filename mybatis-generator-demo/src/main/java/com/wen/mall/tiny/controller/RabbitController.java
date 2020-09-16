@@ -2,6 +2,7 @@ package com.wen.mall.tiny.controller;
 
 import cn.hutool.core.thread.ThreadUtil;
 import com.wen.mall.tiny.common.api.CommonResult;
+import com.wen.mall.tiny.rabbitmq.fanout.FanoutSender;
 import com.wen.mall.tiny.rabbitmq.simple.SimpleSender;
 import com.wen.mall.tiny.rabbitmq.work.WorkSender;
 import io.swagger.annotations.Api;
@@ -22,6 +23,8 @@ public class RabbitController {
     private SimpleSender simpleSender;
     @Autowired
     private WorkSender workSender;
+    @Autowired
+    private FanoutSender fanoutSender;
     @ApiOperation("简单模式")
     @RequestMapping(value = "/simple",method = RequestMethod.GET)
     @ResponseBody
@@ -38,6 +41,16 @@ public class RabbitController {
     public CommonResult workTest() {
         for(int i=0;i<10;i++){
             workSender.send(i);
+            ThreadUtil.sleep(1000);
+        }
+        return CommonResult.success(null);
+    }
+    @ApiOperation("发布/订阅模式")
+    @RequestMapping(value = "/fanout", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult fanoutTest() {
+        for(int i=0;i<10;i++){
+            fanoutSender.send(i);
             ThreadUtil.sleep(1000);
         }
         return CommonResult.success(null);
