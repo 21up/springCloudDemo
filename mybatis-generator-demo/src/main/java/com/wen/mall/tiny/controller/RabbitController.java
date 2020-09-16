@@ -3,6 +3,7 @@ package com.wen.mall.tiny.controller;
 import cn.hutool.core.thread.ThreadUtil;
 import com.wen.mall.tiny.common.api.CommonResult;
 import com.wen.mall.tiny.rabbitmq.simple.SimpleSender;
+import com.wen.mall.tiny.rabbitmq.work.WorkSender;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RabbitController {
     @Autowired
     private SimpleSender simpleSender;
+    @Autowired
+    private WorkSender workSender;
     @ApiOperation("简单模式")
     @RequestMapping(value = "/simple",method = RequestMethod.GET)
     @ResponseBody
@@ -26,6 +29,16 @@ public class RabbitController {
         for (int i=0;i<10;i++){
             simpleSender.send();
             ThreadUtil.sleep(100);
+        }
+        return CommonResult.success(null);
+    }
+    @ApiOperation("工作模式")
+    @RequestMapping(value = "/work", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult workTest() {
+        for(int i=0;i<10;i++){
+            workSender.send(i);
+            ThreadUtil.sleep(1000);
         }
         return CommonResult.success(null);
     }
